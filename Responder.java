@@ -53,6 +53,7 @@ public class Responder
             String response = responseMap.get(word);
             if(response != null) {
                 return response;
+                
             }
         }
         // If we get here, none of the words from the input line was recognized.
@@ -125,7 +126,11 @@ public class Responder
         Path path = Paths.get(FILE_OF_DEFAULT_RESPONSES);
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
             String response = reader.readLine();
+
             while(response != null) {
+                if (response.trim().length() == 0){
+                response = reader.readLine();
+                }
                 defaultResponses.add(response);
                 response = reader.readLine();
             }
